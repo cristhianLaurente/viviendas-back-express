@@ -8,4 +8,4 @@ property_router.get('/properties', getProperties);
 property_router.put('/property/:id', verifyToken, verifyRole, editProperty);
 property_router.delete('/property/:id', verifyToken, verifyRole, deleteProperty);
 property_router.get('/properties/price', getSortedProperties);
-property_router.get('/property/:id', verifyToken, verifyRole, getPropertyById);
+property_router.get('/property/:id', getPropertyById);
