@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { verifyToken } from '../middlewares/authentication';
+import { verifyToken, verifyRole } from '../middlewares/authentication';
 import { logged, checkin } from '../controllers/users';
 
 export const user_router : Router = Router();

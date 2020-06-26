@@ -51,7 +51,6 @@ export const logged = (req: Request, res: Response) => {
     })
 }
 
-
 export const checkin = (req: Request, res: Response) => {
     let { body } = req;
 
