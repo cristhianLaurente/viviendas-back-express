@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { Property } from '../db/mongoose';
 
+
+// traer todas las propiedades
 export const getProperties = (req: Request, res: Response) => {
     Property.find()
             .exec((err, properties) => {
@@ -21,6 +23,30 @@ export const getProperties = (req: Request, res: Response) => {
             })
 }
 
+// traer todas las propiedades por id del usuario
+export const getPropertiesAdmin = (req: Request, res: Response) => {
+    let { query } = req
+    Property.find()
+            .where('user', query.user._id )
+            .exec((err, properties) => {
+                if(err) {
+                    return res.status(500).json({
+                        success: false,
+                        error: {
+                            title: 'database error',
+                            message: err
+                        }
+                    })
+                }
+
+                res.status(200).json({
+                    success: true,
+                    data: properties
+                })
+            })
+}
+
+// traer todas una propiedad por su id
 export const getPropertyById = (req: Request, res: Response) => {
     let {id} = req.params
 
@@ -55,6 +81,7 @@ export const getPropertyById = (req: Request, res: Response) => {
 
 }
 
+// añadir una propiedad 
 export const addProperty = (req: Request, res: Response) => {
     let {body, query} = req;
 
@@ -98,6 +125,7 @@ export const addProperty = (req: Request, res: Response) => {
 
 }
 
+// editar una propiedad por su id
 export const editProperty = (req: Request, res: Response) => {
     let { body, params } = req;
 
@@ -132,7 +160,7 @@ export const editProperty = (req: Request, res: Response) => {
     
 
 }
-
+// eliminamos una propiedad por su id
 export const deleteProperty = (req: Request, res: Response) => {
     let { id } = req.params;
 
@@ -165,9 +193,32 @@ export const deleteProperty = (req: Request, res: Response) => {
 
 }
 
+// traer en orden las propiedad por precio
 export const getSortedProperties = (req: Request, res: Response) => {
     Property.find()
             .sort('price')
+            .exec((err, properties) => {
+                if(err) {
+                    return res.status(500).json({
+                        success: false,
+                        error: {
+                            title: 'database error',
+                            message: err
+                        }
+                    })
+                }
+
+                res.status(200).json({
+                    success: true,
+                    data: properties
+                })
+            })
+}
+export const getSortedPropertiesAdmin = (req: Request, res: Response) => {
+    let {query} = req;
+    Property.find()
+            .sort('price')
+            .where('user', query.user._id )
             .exec((err, properties) => {
                 if(err) {
                     return res.status(500).json({

@@ -1,10 +1,13 @@
 import { Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
+// asignamos roles validos
 let validRoles = {
     values:["ADMIN_ROLE","USER_ROLE"],
     message:"{VALUE} it is not a valid role " 
 }
+
+// creamos nuestro schema user
 export const userSchema: Schema = new Schema({
     name: {
         type: String,
@@ -28,13 +31,13 @@ export const userSchema: Schema = new Schema({
         default:"USER_ROLE",
         enum:validRoles    
     }
-
-    // asd
 })
+// utilizamos la libreria de uniqueValidator para facilitar la validación de las propiedades que son unicas
 userSchema.plugin(uniqueValidator,{
     message:"{PATH} must be unique"
 })  
 
+// eliminamos literalmente el password - para las consultas de dicha coleccion
 userSchema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();

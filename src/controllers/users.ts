@@ -3,6 +3,7 @@ import { User } from '../db/mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+// logeamos un usuario
 export const logged = (req: Request, res: Response) => {
     let { body } = req;
 
@@ -51,6 +52,8 @@ export const logged = (req: Request, res: Response) => {
     })
 }
 
+
+// registramos un usuario
 export const checkin = (req: Request, res: Response) => {
     let { body } = req;
 

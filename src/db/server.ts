@@ -19,9 +19,8 @@ import { property_router } from '../routes/property';
   
 
     }
-     //configuring the function  json
-     //configurando el json (permitir datos)
-     
+
+     //configurando el json (permitir datos) 
     settings__json() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended:true }))

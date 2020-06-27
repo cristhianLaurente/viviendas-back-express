@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
+// construimos un middleware para que haga la authentication del token
 export const verifyToken = ( req: Request, res: Response, next: NextFunction ) => {
     let {token} : any = req.headers;
 
@@ -20,6 +21,7 @@ export const verifyToken = ( req: Request, res: Response, next: NextFunction ) =
     })
 }
 
+// construimos un middleware para que haga la authentication del role de dicho de usuario
 export const verifyRole = (req: Request, res: Response, next: NextFunction) => {
     if(req.query.user.role !== 'ADMIN_ROLE') {
         return res.status(401).json({

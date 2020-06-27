@@ -1,5 +1,6 @@
 import { Schema } from 'mongoose';
 
+// creamos nuestro schema property
 export const propertySchema: Schema = new Schema({
     title: {
         type: String
@@ -18,5 +19,8 @@ export const propertySchema: Schema = new Schema({
     },
     area: {
         type: Number
+    },
+    user: {
+        type: Schema.Types.ObjectId, ref: 'User'
     }
 })
